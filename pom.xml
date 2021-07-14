@@ -74,10 +74,10 @@
 							</annotationProcessorPaths>
 							<annotationProcessors>
 								<!-- Add all the checkers you want to enable here -->
-								<annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
+								<annotationProcessor>org.checkerframework.checker.iteration.IterationChecker</annotationProcessor>
 							</annotationProcessors>
 							<compilerArgs>
-								<!-- <arg>-Awarns</arg> -->
+								<!--<arg>-Awarns</arg>-->
 								<!-- -Awarns turns type-checking errors into warnings. -->
 							</compilerArgs>
 						</configuration>
@@ -88,6 +88,11 @@
 				<dependency>
 					<groupId>org.checkerframework</groupId>
 					<artifactId>checker</artifactId>
+					<version>3.15.1-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+					<groupId>org.checkerframework</groupId>
+					<artifactId>checker-qual</artifactId>
 					<version>3.15.1-SNAPSHOT</version>
 				</dependency>
 			</dependencies>
@@ -810,13 +815,18 @@
 								<artifactId>checker</artifactId>
 								<version>3.15.1-SNAPSHOT</version>
 							</path>
+							<path>
+								<groupId>org.checkerframework</groupId>
+								<artifactId>checker-qual</artifactId>
+								<version>3.15.1-SNAPSHOT</version>
+							</path>
 						</annotationProcessorPaths>
 						<annotationProcessors>
 							<!-- Add all the checkers you want to enable here -->
-							<annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
+							<annotationProcessor>org.checkerframework.checker.iteration.IterationChecker</annotationProcessor>
 						</annotationProcessors>
 						<compilerArgs>
-							<!-- <arg>-Awarns</arg> -->
+							<!--<arg>-Awarns</arg>-->
 							<!-- -Awarns turns type-checking errors into warnings. -->
 						</compilerArgs>
 					</configuration>
