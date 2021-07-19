@@ -265,6 +265,8 @@ public abstract class ModelTest {
 	}
 
 	@Test
+	@SuppressWarnings("iteration:method.invocation") // next called after asserting hasNext returns true : assertion in
+														// test
 	public void testGetStatements_SingleLiteral() {
 		Model model = getNewModelObjectSingleLiteral();
 

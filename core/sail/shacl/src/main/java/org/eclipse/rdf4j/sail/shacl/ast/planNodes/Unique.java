@@ -325,6 +325,7 @@ public class Unique implements PlanNode {
 		}
 
 		@Override
+		@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator implementation
 		public ValidationTuple next() throws SailException {
 			calculateNext();
 			return next.next();

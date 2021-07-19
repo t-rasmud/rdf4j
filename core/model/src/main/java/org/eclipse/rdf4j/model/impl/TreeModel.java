@@ -515,6 +515,7 @@ public class TreeModel extends AbstractModel implements SortedSet<Statement> {
 		}
 
 		@Override
+		@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator implementation
 		public Statement next() {
 			return last = iter.next();
 		}

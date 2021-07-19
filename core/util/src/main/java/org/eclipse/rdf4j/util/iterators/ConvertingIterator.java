@@ -53,6 +53,7 @@ public abstract class ConvertingIterator<S, T> implements Iterator<T> {
 	 * @throws IllegalStateException            If the itertor has been closed.
 	 */
 	@Override
+	@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator implementation
 	public T next() {
 		return convert(sourceIter.next());
 	}

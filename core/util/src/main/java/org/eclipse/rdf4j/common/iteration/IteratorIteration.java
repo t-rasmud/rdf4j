@@ -28,6 +28,7 @@ public class IteratorIteration<E, X extends Exception> implements Iteration<E, X
 	}
 
 	@Override
+	@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator implementation
 	public E next() {
 		return iter.next();
 	}

@@ -41,6 +41,8 @@ class ValueMappingBindingSet extends AbstractBindingSet {
 			}
 
 			@Override
+			@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator
+																// implementation
 			public Binding next() {
 				return mapBinding(idelegate.next());
 			}

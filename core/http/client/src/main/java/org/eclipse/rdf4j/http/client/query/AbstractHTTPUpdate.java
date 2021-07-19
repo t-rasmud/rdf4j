@@ -47,6 +47,7 @@ public abstract class AbstractHTTPUpdate extends AbstractUpdate {
 		return httpClient;
 	}
 
+	@SuppressWarnings("iteration:method.invocation") // next called in loop: loop index always less than Iterator size
 	public Binding[] getBindingsArray() {
 		BindingSet bindings = this.getBindings();
 

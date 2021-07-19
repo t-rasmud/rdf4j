@@ -42,6 +42,7 @@ public class CollectionIteration<E, X extends Exception> extends AbstractCloseab
 	}
 
 	@Override
+	@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator implementation
 	public E next() throws X {
 		if (isClosed()) {
 			throw new NoSuchElementException("The iteration has been closed.");

@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.eclipse.rdf4j.federated.FederationContext;
 import org.eclipse.rdf4j.federated.algebra.PassThroughTupleExpr;
 import org.eclipse.rdf4j.federated.evaluation.concurrent.ParallelTask;
@@ -108,6 +109,7 @@ public class QueryInfo {
 		return query;
 	}
 
+	@SideEffectFree
 	public QueryType getQueryType() {
 		return queryType;
 	}

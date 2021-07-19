@@ -60,6 +60,7 @@
 						<version>3.8.1</version>
 						<configuration>
 							<fork>true</fork>
+							<showWarnings>true</showWarnings>
 							<!-- Must fork or else JVM arguments are ignored. -->
 							<compilerArguments>
 								<Xmaxerrs>10000</Xmaxerrs>
@@ -794,6 +795,7 @@
 						<fork>true</fork>
 						<source>11</source>
 						<target>11</target>
+						<showWarnings>true</showWarnings>
 						<encoding>utf8</encoding>
 						<compilerArguments>
 							<Xmaxerrs>10000</Xmaxerrs>

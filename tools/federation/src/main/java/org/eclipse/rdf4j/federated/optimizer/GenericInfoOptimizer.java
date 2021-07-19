@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.eclipse.rdf4j.federated.algebra.FedXLeftJoin;
 import org.eclipse.rdf4j.federated.algebra.NJoin;
 import org.eclipse.rdf4j.federated.exception.OptimizationException;
@@ -156,6 +157,7 @@ public class GenericInfoOptimizer extends AbstractQueryModelVisitor<Optimization
 		return services != null && services.size() > 0;
 	}
 
+	@SideEffectFree
 	public List<Service> getServices() {
 		return services == null ? Collections.emptyList() : services;
 	}

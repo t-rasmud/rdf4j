@@ -11,6 +11,8 @@ package org.eclipse.rdf4j.common.iteration;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
+import org.checkerframework.dataflow.qual.SideEffectFree;
+
 /**
  * An Iteration is a typed Iterator-like object that can throw (typed) Exceptions while iterating. This is used in cases
  * where the iteration is lazy and evaluates over a (remote) connection, for example accessing a database. In such cases
@@ -32,6 +34,7 @@ public interface Iteration<E, X extends Exception> {
 	 * @return <tt>true</tt> if the iteration has more elements.
 	 * @throws X
 	 */
+	@SideEffectFree
 	public boolean hasNext() throws X;
 
 	/**

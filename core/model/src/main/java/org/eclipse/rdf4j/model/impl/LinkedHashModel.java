@@ -311,6 +311,7 @@ public class LinkedHashModel extends AbstractModel {
 		}
 
 		@Override
+		@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator implementation
 		public ModelStatement next() {
 			return last = iter.next();
 		}

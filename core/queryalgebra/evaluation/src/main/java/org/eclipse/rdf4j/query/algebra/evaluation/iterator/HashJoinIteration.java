@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.checkerframework.checker.iteration.qual.HasNext;
 import org.eclipse.rdf4j.common.iteration.CloseableIteration;
 import org.eclipse.rdf4j.common.iteration.LookAheadIteration;
 import org.eclipse.rdf4j.common.iterator.UnionIterator;
@@ -100,6 +101,8 @@ public class HashJoinIteration extends LookAheadIteration<BindingSet, QueryEvalu
 	 *---------*/
 
 	@Override
+	@SuppressWarnings("iteration:method.invocation") // null as a proxy for hasNext: `nextHashTableValues` has atleast
+														// one element if it isn't null
 	protected BindingSet getNextElement() throws QueryEvaluationException {
 		Map<BindingSetHashKey, List<BindingSet>> nextHashTable = hashTable;
 		if (nextHashTable == null) {
@@ -347,7 +350,7 @@ public class HashJoinIteration extends LookAheadIteration<BindingSet, QueryEvalu
 
 	// hooks for LimitedSizeHashJoinIterator
 
-	protected <E> E nextFromCache(Iterator<E> iter) {
+	protected <E> E nextFromCache(@HasNext Iterator<E> iter) {
 		return iter.next();
 	}
 

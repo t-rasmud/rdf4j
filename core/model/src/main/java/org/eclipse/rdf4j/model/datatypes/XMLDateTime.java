@@ -117,6 +117,8 @@ public class XMLDateTime implements Cloneable, Comparable<XMLDateTime> {
 	 * Methods *
 	 *---------*/
 
+	@SuppressWarnings("iteration:method.invocation") // NoSuchElementException caught: catch block handles
+														// NoSuchElementException
 	private void parseDateTimeString() {
 		if (dateTimeString.length() < 19) {
 			throw new IllegalArgumentException(

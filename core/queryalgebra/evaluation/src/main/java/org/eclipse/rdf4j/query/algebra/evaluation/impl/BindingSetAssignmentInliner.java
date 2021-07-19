@@ -41,6 +41,7 @@ public class BindingSetAssignmentInliner implements QueryOptimizer {
 		private BindingSet bindingSet;
 
 		@Override
+		@SuppressWarnings("iteration:method.invocation") // true positive: https://github.com/eclipse/rdf4j/issues/3090
 		public void meet(BindingSetAssignment bsa) {
 			Iterator<BindingSet> iter = bsa.getBindingSets().iterator();
 			BindingSet firstBindingSet = iter.next();

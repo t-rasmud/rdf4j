@@ -69,6 +69,8 @@ public class TargetChainPopper implements PlanNode {
 			}
 
 			@Override
+			@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator
+																// implementation
 			protected ValidationTuple loggingNext() throws SailException {
 				calculateNext();
 

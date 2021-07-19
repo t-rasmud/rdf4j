@@ -54,6 +54,8 @@ public class ValuesBackedNode implements PlanNode {
 			}
 
 			@Override
+			@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator
+																// implementation
 			public ValidationTuple loggingNext() throws SailException {
 				List<Value> targets = new ArrayList<>();
 				targets.add(iterator.next());

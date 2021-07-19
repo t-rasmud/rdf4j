@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.checkerframework.checker.iteration.qual.HasNext;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.QueryEvaluationException;
 import org.eclipse.rdf4j.query.algebra.Join;
@@ -39,7 +40,7 @@ public class LimitedSizeHashJoinIteration extends HashJoinIteration {
 	}
 
 	@Override
-	protected <E> E nextFromCache(Iterator<E> iter) {
+	protected <E> E nextFromCache(@HasNext Iterator<E> iter) {
 		E v = iter.next();
 		used.decrementAndGet();
 		iter.remove();

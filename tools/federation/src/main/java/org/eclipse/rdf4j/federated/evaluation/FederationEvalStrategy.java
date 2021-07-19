@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.eclipse.rdf4j.common.iteration.CloseableIteration;
 import org.eclipse.rdf4j.common.iteration.EmptyIteration;
 import org.eclipse.rdf4j.common.iteration.SingletonIteration;
@@ -288,6 +289,7 @@ public abstract class FederationEvalStrategy extends StrictEvaluationStrategy {
 	 * @param serviceNodes
 	 * @return if <code>true</code>, a {@link SingleSourceQuery} containing SERVICE clauses is propagated as-is
 	 */
+	@SideEffectFree
 	protected boolean propagateServices(List<Service> serviceNodes) {
 		boolean hasServices = serviceNodes != null && !serviceNodes.isEmpty();
 		if (hasServices) {

@@ -111,6 +111,8 @@ public class Sort implements PlanNode {
 			}
 
 			@Override
+			@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator
+																// implementation
 			protected ValidationTuple loggingNext() throws SailException {
 				sortTuples();
 

@@ -106,6 +106,8 @@ public class BufferedSplitter implements PlanNodeProvider {
 				}
 
 				@Override
+				@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator
+																	// implementation
 				public ValidationTuple next() throws SailException {
 					ValidationTuple tuple = iterator.next();
 					if (GlobalValidationExecutionLogging.loggingEnabled) {

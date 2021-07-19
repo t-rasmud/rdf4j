@@ -63,6 +63,7 @@ public class CloseableIteratorIteration<E, X extends Exception> extends Abstract
 	}
 
 	@Override
+	@SuppressWarnings("iteration:method.invocation") // next implementation: call to next in Iterator implementation
 	public E next() throws X {
 		if (isClosed()) {
 			throw new NoSuchElementException("Iteration has been closed");
