@@ -164,8 +164,6 @@ public abstract class AbstractLuceneSailGeoSPARQLTest {
 				expected.put(SUBJECT_1, EIFFEL_TOWER);
 				expected.put(SUBJECT_2, ARC_TRIOMPHE);
 
-				IRI expectedUri = expected.keySet().iterator().next();
-
 				while (result.hasNext()) {
 					BindingSet bindings = result.next();
 					IRI subj = (IRI) bindings.getValue("toUri");

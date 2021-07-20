@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.checkerframework.checker.nonempty.qual.NonEmpty;
 import org.eclipse.rdf4j.model.BNode;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
@@ -472,7 +473,7 @@ class GraphComparisons {
 			final List<Collection<BNode>> sortedPartitions = new ArrayList<>(
 					getCurrentHashCodeMapping().asMap().values());
 			Collections.sort(sortedPartitions, new Comparator<Collection<BNode>>() {
-				public int compare(Collection<BNode> a, Collection<BNode> b) {
+				public int compare(@NonEmpty Collection<BNode> a, @NonEmpty Collection<BNode> b) {
 					int result = a.size() - b.size();
 					if (result == 0) {
 						// break tie by comparing value hash
