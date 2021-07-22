@@ -80,6 +80,7 @@
 							<compilerArgs>
 								<arg>"-AsuppressWarnings=contracts.conditional.postcondition"</arg>
 								<arg>-Awarns</arg>
+								<arg>-Astubs="/Users/rashmi/iteration-case-studies/rdf4j/guava.astub"</arg>
 								<!-- -Awarns turns type-checking errors into warnings. -->
 							</compilerArgs>
 						</configuration>
@@ -819,6 +820,7 @@
 						</annotationProcessors>
 						<compilerArgs>
 							<arg>"-AsuppressWarnings=contracts.conditional.postcondition"</arg>
+							<arg>-Astubs="/Users/rashmi/iteration-case-studies/rdf4j/guava.astub"</arg>
 							<arg>-Awarns</arg>
 							<!-- -Awarns turns type-checking errors into warnings. -->
 						</compilerArgs>

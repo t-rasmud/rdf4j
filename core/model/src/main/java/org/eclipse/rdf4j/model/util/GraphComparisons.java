@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.checkerframework.checker.nonempty.qual.NonEmpty;
+import org.checkerframework.framework.qual.RequiresQualifier;
 import org.eclipse.rdf4j.model.BNode;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
@@ -48,11 +49,11 @@ import com.google.common.hash.Hashing;
 
 /**
  * Functions for canonicalizing RDF models and computing isomorphism.
- * 
+ *
  * @implNote The algorithms used in this class are based on the iso-canonical algorithm as described in: Hogan, A.
  *           (2017). Canonical forms for isomorphic and equivalent RDF graphs: algorithms for leaning and labelling
  *           blank nodes. ACM Transactions on the Web (TWEB), 11(4), 1-62.
- * 
+ *
  * @author Jeen Broekstra
  */
 class GraphComparisons {
@@ -74,7 +75,7 @@ class GraphComparisons {
 	 * nodes occur. A Model can consist of more than one graph (denoted by context identifiers). Two models are
 	 * considered isomorphic if for each of the graphs in one model, an isomorphic graph exists in the other model, and
 	 * the context identifiers of these graphs are identical.
-	 * 
+	 *
 	 * @implNote The algorithm used by this comparison is a depth-first search for an iso-canonical blank node mapping
 	 *           for each model, and using that as a basis for comparison. The algorithm is described in detail in:
 	 *           Hogan, A. (2017). Canonical forms for isomorphic and equivalent RDF graphs: algorithms for leaning and
@@ -85,7 +86,7 @@ class GraphComparisons {
 	 * @see Hogan, A. (2017). Canonical forms for isomorphic and equivalent RDF graphs: algorithms for leaning and
 	 *      labelling blank nodes. ACM Transactions on the Web (TWEB), 11(4), 1-62.
 	 *      <a href="http://aidanhogan.com/docs/rdf-canonicalisation.pdf">Technical Paper (PDF )</a>
-	 * 
+	 *
 	 */
 	public static boolean isomorphic(Model model1, Model model2) {
 		if (model1 == model2) {
@@ -454,7 +455,7 @@ class GraphComparisons {
 
 		/**
 		 * A partitioning is fine if every hashcode maps to exactly one blank node.
-		 * 
+		 *
 		 * @return true if the partitioning is fine, false otherwise.
 		 */
 		public boolean isFine() {
@@ -530,7 +531,8 @@ class GraphComparisons {
 			);
 		}
 
-		private Multimap<HashCode, BNode> getCurrentHashCodeMapping() {
+		@RequiresQualifier(expression = "this.currentNodeMapping", qualifier = NonEmpty.class)
+		private @NonEmpty Multimap<HashCode, BNode> getCurrentHashCodeMapping() {
 			if (currentHashCodeMapping == null) {
 				currentHashCodeMapping = Multimaps.invertFrom(Multimaps.forMap(currentNodeMapping),
 						HashMultimap.create());
@@ -550,7 +552,8 @@ class GraphComparisons {
 
 			final Multimap<HashCode, BNode> previous = Multimaps.invertFrom(Multimaps.forMap(previousNodeMapping),
 					HashMultimap.create());
-			for (Collection<BNode> currentSharedHashNodes : getCurrentHashCodeMapping().asMap().values()) {
+			for (@NonEmpty
+			Collection<BNode> currentSharedHashNodes : getCurrentHashCodeMapping().asMap().values()) {
 				// pick a BNode, doesn't matter which: they all share the same hashcode
 				BNode node = currentSharedHashNodes.iterator().next();
 				HashCode previousHashCode = previousNodeMapping.get(node);

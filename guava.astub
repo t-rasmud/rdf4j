@@ -1,0 +1,8 @@
+package com.google.common.collect;
+
+import org.checkerframework.dataflow.qual.SideEffectFree;
+
+public interface Multimap<K extends @Nullable Object, V extends @Nullable Object> {
+    @SideEffectFree
+    Map<K, Collection<V>> asMap(Multimap<K, V> this);
+}
