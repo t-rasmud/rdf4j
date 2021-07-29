@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.checkerframework.checker.nonempty.qual.PolyNonEmpty;
+import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.eclipse.rdf4j.model.Value;
 
 /**
@@ -32,7 +34,8 @@ public interface BindingSet extends Iterable<Binding>, Serializable {
 	 *
 	 * @return A set of binding names.
 	 */
-	Set<String> getBindingNames();
+	@PolyNonEmpty
+	Set<String> getBindingNames(@PolyNonEmpty BindingSet this);
 
 	/**
 	 * Gets the binding with the specified name from this BindingSet.
@@ -57,6 +60,7 @@ public interface BindingSet extends Iterable<Binding>, Serializable {
 	 * @return The value of the binding with the specified name, or <tt>null</tt> if there is no such binding in this
 	 *         BindingSet.
 	 */
+	@SideEffectFree
 	Value getValue(String bindingName);
 
 	/**

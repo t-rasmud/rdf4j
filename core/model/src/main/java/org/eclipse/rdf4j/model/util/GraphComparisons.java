@@ -24,7 +24,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.checkerframework.checker.nonempty.qual.EnsuresNonEmpty;
 import org.checkerframework.checker.nonempty.qual.NonEmpty;
+import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.checkerframework.framework.qual.RequiresQualifier;
 import org.eclipse.rdf4j.model.BNode;
 import org.eclipse.rdf4j.model.IRI;
@@ -88,7 +90,7 @@ class GraphComparisons {
 	 *      <a href="http://aidanhogan.com/docs/rdf-canonicalisation.pdf">Technical Paper (PDF )</a>
 	 *
 	 */
-	public static boolean isomorphic(Model model1, Model model2) {
+	public static boolean isomorphic(@NonEmpty Model model1, @NonEmpty Model model2) {
 		if (model1 == model2) {
 			return true;
 		}
@@ -150,7 +152,7 @@ class GraphComparisons {
 		}
 	}
 
-	private static boolean isomorphicSingleContext(Model model1, Model model2) {
+	private static boolean isomorphicSingleContext(@NonEmpty Model model1, @NonEmpty Model model2) {
 		final Map<BNode, HashCode> mapping1 = getIsoCanonicalMapping(model1);
 		if (mapping1.isEmpty()) {
 			// no blank nodes in model1 - simple collection equality will do
@@ -189,11 +191,11 @@ class GraphComparisons {
 		return false;
 	}
 
-	protected static Model isoCanonicalize(Model m) {
+	protected static Model isoCanonicalize(@NonEmpty Model m) {
 		return labelModel(m, getIsoCanonicalMapping(m));
 	}
 
-	protected static Map<BNode, HashCode> getIsoCanonicalMapping(Model m) {
+	protected static @NonEmpty Map<BNode, HashCode> getIsoCanonicalMapping(@NonEmpty Model m) {
 		Partitioning partitioning = hashBNodes(m);
 
 		if (partitioning.isFine()) {
@@ -330,11 +332,11 @@ class GraphComparisons {
 		return result;
 	}
 
-	protected static Partitioning hashBNodes(Model m) {
+	protected static Partitioning hashBNodes(@NonEmpty Model m) {
 		return hashBNodes(m, null);
 	}
 
-	private static Partitioning hashBNodes(Model m, Partitioning partitioning) {
+	private static Partitioning hashBNodes(@NonEmpty Model m, Partitioning partitioning) {
 		if (partitioning == null) {
 			final Set<BNode> blankNodes = getBlankNodes(m);
 			partitioning = new Partitioning(blankNodes);
@@ -439,11 +441,13 @@ class GraphComparisons {
 
 		}
 
+		@EnsuresNonEmpty(value = "this.currentNodeMapping")
 		public void setCurrentHashCode(BNode bnode, HashCode hashCode) {
 			currentNodeMapping.put(bnode, hashCode);
 		}
 
-		public Map<BNode, HashCode> getCurrentNodeMapping() {
+		@RequiresQualifier(expression = "this.currentNodeMapping", qualifier = NonEmpty.class)
+		public @NonEmpty Map<BNode, HashCode> getCurrentNodeMapping() {
 			return Collections.unmodifiableMap(currentNodeMapping);
 		}
 
@@ -458,6 +462,7 @@ class GraphComparisons {
 		 *
 		 * @return true if the partitioning is fine, false otherwise.
 		 */
+		@SideEffectFree
 		public boolean isFine() {
 			return getCurrentHashCodeMapping().asMap().values().stream().allMatch(member -> member.size() == 1);
 		}

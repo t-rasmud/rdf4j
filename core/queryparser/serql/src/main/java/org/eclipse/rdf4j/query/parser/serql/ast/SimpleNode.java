@@ -12,6 +12,8 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.checkerframework.checker.nonempty.qual.EnsuresNonEmpty;
+
 public class SimpleNode implements Node {
 
 	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
@@ -53,6 +55,7 @@ public class SimpleNode implements Node {
 	}
 
 	@Override
+	@EnsuresNonEmpty(value = "children")
 	public void jjtAddChild(Node n, int i) {
 		while (i >= children.size()) {
 			// Add dummy nodes
@@ -63,11 +66,13 @@ public class SimpleNode implements Node {
 	}
 
 	@Override
+	@EnsuresNonEmpty(value = "children")
 	public void jjtAppendChild(Node n) {
 		children.add(n);
 	}
 
 	@Override
+	@EnsuresNonEmpty(value = "children")
 	public void jjtInsertChild(Node n, int i) {
 		children.add(i, n);
 	}

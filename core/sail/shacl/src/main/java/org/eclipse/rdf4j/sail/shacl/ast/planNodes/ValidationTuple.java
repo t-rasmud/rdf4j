@@ -132,6 +132,7 @@ public class ValidationTuple {
 		return valueComparator.compare(left, right);
 	}
 
+	@SuppressWarnings("iteration:method.invocation") // next called in loop: loop index always less than Iterator size
 	public int compareFullTarget(ValidationTuple other) {
 
 		int min = Math.min(getFullChainSize(false), other.getFullChainSize(false));

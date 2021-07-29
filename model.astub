@@ -1,0 +1,8 @@
+package org.eclipse.rdf4j.model;
+
+import org.checkerframework.checker.nonempty.qual.EnsuresNonEmpty;
+
+public interface Model extends Set<Statement>, Serializable, NamespaceAware {
+    @EnsuresNonEmpty(value = "this")
+    boolean	add(Resource subj, IRI pred, Value obj, Resource... contexts);
+}

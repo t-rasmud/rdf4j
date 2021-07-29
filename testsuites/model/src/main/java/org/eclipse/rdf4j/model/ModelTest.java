@@ -16,10 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.Serializable;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Set;
 
+import org.checkerframework.checker.nonempty.qual.EnsuresNonEmpty;
+import org.checkerframework.checker.nonempty.qual.NonEmpty;
+import org.checkerframework.checker.nonempty.qual.PolyNonEmpty;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
@@ -30,6 +35,65 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.Timeout;
+
+interface Value extends Serializable {
+}
+
+interface Statement extends Serializable {
+	Value getObject();
+}
+
+interface Resource extends Value {
+}
+
+interface URI extends Resource {
+}
+
+interface IRI extends URI, Resource {
+}
+
+interface Namespace extends Serializable, Comparable<Namespace> {
+	boolean isPresent();
+
+	Namespace get();
+
+	Namespace orElse(Object obj);
+}
+
+interface Model extends Set<Statement>, Serializable {
+	@EnsuresNonEmpty(value = "this")
+	boolean add(Resource subj, IRI pred, Value obj, Resource... contexts);
+
+	boolean contains(Resource subj, IRI pred, Value obj, Resource... contexts);
+
+	Model filter(Resource subj, IRI pred, Value obj, Resource... contexts);
+
+	boolean remove(Resource subj, IRI pred, Value obj, Resource... contexts);
+
+	@PolyNonEmpty
+	Set<Resource> subjects(@PolyNonEmpty Model this);
+
+	@PolyNonEmpty
+	Set<IRI> predicates(@PolyNonEmpty Model this);
+
+	@PolyNonEmpty
+	Set<Value> objects(@PolyNonEmpty Model this);
+
+	@PolyNonEmpty
+	Set<Resource> contexts(@PolyNonEmpty Model this);
+
+	Set<Namespace> getNamespaces();
+
+	Optional<Namespace> removeNamespace(String prefix);
+
+	Namespace getNamespace(String prefix);
+
+	Namespace setNamespace(Namespace name);
+
+	Namespace setNamespace(String name1, String name2);
+
+	Iterable<Statement> getStatements(Resource subject, IRI predicate, Value object, Resource... contexts);
+}
 
 /**
  * Abstract test suite for implementations of the {@link Model} interface
@@ -94,7 +158,7 @@ public abstract class ModelTest {
 		return model;
 	}
 
-	protected Model getNewModelObjectDoubleLiteral() {
+	protected @NonEmpty Model getNewModelObjectDoubleLiteral() {
 		Model model = getNewEmptyModel();
 		model.add(uri1, RDFS.LABEL, literal1);
 		model.add(uri1, RDFS.LABEL, literal2);
@@ -102,7 +166,7 @@ public abstract class ModelTest {
 		return model;
 	}
 
-	protected Model getNewModelObjectDoubleURI() {
+	protected @NonEmpty Model getNewModelObjectDoubleURI() {
 		Model model = getNewEmptyModel();
 		model.add(uri1, RDFS.LABEL, uri2);
 		model.add(uri1, RDFS.LABEL, uri3);
@@ -110,7 +174,7 @@ public abstract class ModelTest {
 		return model;
 	}
 
-	protected Model getNewModelObjectDoubleBNode() {
+	protected @NonEmpty Model getNewModelObjectDoubleBNode() {
 		Model model = getNewEmptyModel();
 		model.add(uri1, RDFS.LABEL, bnode1);
 		model.add(uri1, RDFS.LABEL, bnode2);
@@ -232,7 +296,7 @@ public abstract class ModelTest {
 		return model;
 	}
 
-	protected Model getNewModelTwoContexts() {
+	protected @NonEmpty Model getNewModelTwoContexts() {
 		Model model = getNewEmptyModel();
 		model.add(uri1, RDFS.LABEL, bnode1, uri1);
 		model.add(uri1, RDFS.LABEL, literal1, uri1);

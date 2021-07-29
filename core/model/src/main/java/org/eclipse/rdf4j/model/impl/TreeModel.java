@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.checkerframework.checker.nonempty.qual.PolyNonEmpty;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Namespace;
@@ -183,12 +184,13 @@ public class TreeModel extends AbstractModel implements SortedSet<Statement> {
 	}
 
 	@Override
-	public SortedSet<Statement> subSet(Statement fromElement, Statement toElement) {
+	public @PolyNonEmpty SortedSet<Statement> subSet(@PolyNonEmpty TreeModel this, Statement fromElement,
+			Statement toElement) {
 		return subSet(fromElement, true, toElement, false);
 	}
 
 	@Override
-	public SortedSet<Statement> headSet(Statement toElement) {
+	public @PolyNonEmpty SortedSet<Statement> headSet(@PolyNonEmpty TreeModel this, Statement toElement) {
 		return subSet(before(null, null, null, null), true, toElement, false);
 	}
 
@@ -394,7 +396,9 @@ public class TreeModel extends AbstractModel implements SortedSet<Statement> {
 		return vc.compare(o1, o2);
 	}
 
-	SortedSet<Statement> subSet(Statement lo, boolean loInclusive, Statement hi, boolean hiInclusive) {
+	@PolyNonEmpty
+	SortedSet<Statement> subSet(@PolyNonEmpty TreeModel this, Statement lo, boolean loInclusive, Statement hi,
+			boolean hiInclusive) {
 		return new SubSet(this, new TreeStatement(lo), loInclusive, new TreeStatement(hi), hiInclusive);
 	}
 
@@ -734,7 +738,8 @@ public class TreeModel extends AbstractModel implements SortedSet<Statement> {
 
 		private final boolean loInclusive, hiInclusive;
 
-		public SubSet(TreeModel model, TreeStatement lo, boolean loInclusive, TreeStatement hi, boolean hiInclusive) {
+		public @PolyNonEmpty SubSet(@PolyNonEmpty TreeModel model, TreeStatement lo, boolean loInclusive,
+				TreeStatement hi, boolean hiInclusive) {
 			this.model = model;
 			this.lo = lo;
 			this.loInclusive = loInclusive;

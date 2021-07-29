@@ -68,6 +68,7 @@ public class TupleFunctionFederatedService implements FederatedService {
 	}
 
 	@Override
+	@SuppressWarnings("iteration:method.invocation") // next called in loop: loop condition ensures Iterator hasNext
 	public boolean ask(Service service, BindingSet bindings, String baseUri) throws QueryEvaluationException {
 		try (final CloseableIteration<BindingSet, QueryEvaluationException> iter = evaluate(service,
 				new SingletonIteration<>(bindings), baseUri);) {

@@ -9,6 +9,9 @@ package org.eclipse.rdf4j.query.parser.serql.ast;
 
 import java.util.List;
 
+import org.checkerframework.checker.nonempty.qual.NonEmpty;
+import org.checkerframework.framework.qual.RequiresQualifier;
+
 public class ASTAnd extends ASTBooleanExpr {
 
 	public ASTAnd(int id) {
@@ -24,7 +27,8 @@ public class ASTAnd extends ASTBooleanExpr {
 		return visitor.visit(this, data);
 	}
 
-	public List<ASTBooleanExpr> getOperandList() {
+	@RequiresQualifier(expression = "children", qualifier = NonEmpty.class)
+	public @NonEmpty List<ASTBooleanExpr> getOperandList() {
 		return new CastingList<>(children);
 	}
 }

@@ -201,6 +201,8 @@ public class ArrangedWriter extends AbstractRDFWriter {
 		}
 	}
 
+	@SuppressWarnings("iteration:method.invocation") // Guard condition ensures Iterator hasNext: blanks.isEmpty() ==>
+														// !stmtBySubject.isEmpty()
 	private synchronized Statement nextStatement() {
 		if (stmtBySubject.isEmpty() && blanks.isEmpty()) {
 			assert queueSize == 0;

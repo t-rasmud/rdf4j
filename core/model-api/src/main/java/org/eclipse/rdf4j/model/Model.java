@@ -192,7 +192,8 @@ public interface Model extends Set<Statement>, Serializable, NamespaceAware {
 	 *
 	 * @see #filter(Resource, IRI, Value, Resource...)
 	 */
-	public default Iterable<Statement> getStatements(Resource subject, IRI predicate, Value object,
+	public default Iterable<Statement> getStatements(Resource subject, IRI predicate,
+			Value object,
 			Resource... contexts) {
 		return () -> filter(subject, predicate, object, contexts).iterator();
 	}

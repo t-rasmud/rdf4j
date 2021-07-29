@@ -8,6 +8,7 @@
 
 package org.eclipse.rdf4j.sail.shacl;
 
+import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.eclipse.rdf4j.common.annotation.InternalUseOnly;
 import org.eclipse.rdf4j.model.Statement;
 
@@ -43,6 +44,7 @@ public class Stats {
 	 *
 	 * @return true if statements were effectively removed in this transaction
 	 */
+	@SideEffectFree
 	public boolean hasRemoved() {
 		return hasRemoved;
 	}

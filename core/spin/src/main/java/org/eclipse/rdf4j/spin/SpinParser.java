@@ -346,6 +346,8 @@ public class SpinParser {
 		return (ParsedUpdate) parse(queryResource, SP.UPDATE_CLASS, store);
 	}
 
+	@SuppressWarnings("iteration:method.invocation") // Guard condition ensures Iterator hasNext: isQueryElseTemplate ==
+														// Boolean.TRUE ==> possibleQueryTypes : NonEmpty
 	protected ParsedOperation parse(Resource queryResource, IRI queryClass, TripleSource store) throws RDF4JException {
 		Boolean isQueryElseTemplate = null;
 		Set<IRI> possibleQueryTypes = new HashSet<>();

@@ -9,6 +9,9 @@ package org.eclipse.rdf4j.query.parser.serql.ast;
 
 import java.util.List;
 
+import org.checkerframework.checker.nonempty.qual.NonEmpty;
+import org.checkerframework.framework.qual.RequiresQualifier;
+
 public class ASTPathExprUnion extends ASTPathExpr {
 
 	public ASTPathExprUnion(int id) {
@@ -24,7 +27,8 @@ public class ASTPathExprUnion extends ASTPathExpr {
 		return visitor.visit(this, data);
 	}
 
-	public List<ASTPathExpr> getPathExprList() {
+	@RequiresQualifier(expression = "children", qualifier = NonEmpty.class)
+	public @NonEmpty List<ASTPathExpr> getPathExprList() {
 		return new CastingList<>(children);
 	}
 }

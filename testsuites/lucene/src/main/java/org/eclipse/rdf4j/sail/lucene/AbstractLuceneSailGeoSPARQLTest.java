@@ -148,6 +148,7 @@ public abstract class AbstractLuceneSailGeoSPARQLTest {
 	}
 
 	@Test
+	@SuppressWarnings("iteration:method.invocation") // next called in loop: loop index always less than Iterator size
 	public void testDistanceQuery() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		try (RepositoryConnection connection = repository.getConnection()) {
 			String queryStr = "prefix geo:  <" + GEO.NAMESPACE + ">" + "prefix geof: <" + GEOF.NAMESPACE + ">"
@@ -181,6 +182,7 @@ public abstract class AbstractLuceneSailGeoSPARQLTest {
 	}
 
 	@Test
+	@SuppressWarnings("iteration:method.invocation") // next called in loop: loop index always less than Iterator size
 	public void testComplexDistanceQuery()
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		try (RepositoryConnection connection = repository.getConnection()) {
@@ -217,6 +219,7 @@ public abstract class AbstractLuceneSailGeoSPARQLTest {
 	}
 
 	@Test
+	@SuppressWarnings("iteration:method.invocation") // next called in loop: loop index always less than Iterator size
 	public void testComplexDistanceQueryMathExpr()
 			throws RepositoryException, MalformedQueryException, QueryEvaluationException {
 		try (RepositoryConnection connection = repository.getConnection()) {

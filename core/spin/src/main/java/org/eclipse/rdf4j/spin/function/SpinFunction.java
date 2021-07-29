@@ -60,6 +60,8 @@ public class SpinFunction extends AbstractSpinFunction implements TransientFunct
 	}
 
 	@Override
+	@SuppressWarnings("iteration:method.invocation") // Guard condition ensures Iterator hasNext: queryResult.hasNext()
+														// ==> bs.size() > 0
 	public Value evaluate(ValueFactory valueFactory, Value... args) throws ValueExprEvaluationException {
 		QueryPreparer qp = getCurrentQueryPreparer();
 		Value result;

@@ -56,6 +56,8 @@ public class IndependentJoingroupBindingsIteration3 extends LookAheadIteration<B
 		return result.get(currentIdx++);
 	}
 
+	@SuppressWarnings("iteration:method.invocation") // Guard condition ensures Iterator hasNext: bIn.size() == 1 ==>
+														// bIn.getBindingNames() is NonEmpty
 	protected ArrayList<BindingSet> computeResult() throws QueryEvaluationException {
 
 		// underlying arraylist serves as map, index corresponds to bindings index (i.e. at most bindings.size() - 1)

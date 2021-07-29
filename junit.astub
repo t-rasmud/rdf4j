@@ -1,0 +1,10 @@
+package org.junit.jupiter.api;
+
+import org.checkerframework.dataflow.qual.SideEffectFree;
+
+public final class Assertions extends Object {
+    @SideEffectFree
+    static void assertEquals(int expected, int actual){}
+    @SideEffectFree
+    static void assertNotNull(Object object){}
+}

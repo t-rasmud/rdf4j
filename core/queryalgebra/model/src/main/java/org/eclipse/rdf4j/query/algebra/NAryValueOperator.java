@@ -10,6 +10,10 @@ package org.eclipse.rdf4j.query.algebra;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.checkerframework.checker.nonempty.qual.EnsuresNonEmpty;
+import org.checkerframework.checker.nonempty.qual.NonEmpty;
+import org.checkerframework.framework.qual.RequiresQualifier;
+
 /**
  * An abstract superclass for N-ary value operators.
  *
@@ -50,10 +54,12 @@ public abstract class NAryValueOperator extends AbstractQueryModelNode implement
 		this.args = args;
 	}
 
-	public List<ValueExpr> getArguments() {
+	@RequiresQualifier(expression = "args", qualifier = NonEmpty.class)
+	public @NonEmpty List<ValueExpr> getArguments() {
 		return this.args;
 	}
 
+	@EnsuresNonEmpty(value = "args")
 	public void addArgument(ValueExpr arg) {
 		if (args == null) {
 			args = new ArrayList<>();

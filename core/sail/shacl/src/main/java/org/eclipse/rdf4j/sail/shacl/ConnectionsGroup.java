@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.eclipse.rdf4j.common.annotation.InternalUseOnly;
 import org.eclipse.rdf4j.sail.Sail;
 import org.eclipse.rdf4j.sail.SailConnection;
@@ -66,6 +67,7 @@ public class ConnectionsGroup implements Closeable {
 		return previousStateConnection;
 	}
 
+	@SideEffectFree
 	public SailConnection getAddedStatements() {
 		SailConnection connection = addedStatements.getConnection();
 		connectionsToClose.add(connection);
@@ -108,6 +110,7 @@ public class ConnectionsGroup implements Closeable {
 		return rdfsSubClassOfReasonerProvider.getRdfsSubClassOfReasoner();
 	}
 
+	@SideEffectFree
 	public Stats getStats() {
 		return stats;
 	}

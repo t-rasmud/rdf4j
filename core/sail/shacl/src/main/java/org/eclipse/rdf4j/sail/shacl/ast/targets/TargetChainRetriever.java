@@ -91,6 +91,9 @@ public class TargetChainRetriever implements PlanNode {
 			// for de-duping bindings
 			MapBindingSet previousBindings;
 
+			@SuppressWarnings("iteration:method.invocation") // Guard condition ensures Iterator hasNext: second if
+																// condition on do-while ensures
+																// removedStatementIterator hasNext
 			public void calculateNextStatementMatcher() {
 				if (statements != null && statements.hasNext()) {
 					return;

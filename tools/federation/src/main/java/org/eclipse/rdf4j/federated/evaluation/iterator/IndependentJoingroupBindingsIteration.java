@@ -10,6 +10,7 @@ package org.eclipse.rdf4j.federated.evaluation.iterator;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.checkerframework.checker.nonempty.qual.NonEmpty;
 import org.eclipse.rdf4j.common.iteration.CloseableIteration;
 import org.eclipse.rdf4j.common.iteration.LookAheadIteration;
 import org.eclipse.rdf4j.query.Binding;
@@ -49,6 +50,8 @@ public class IndependentJoingroupBindingsIteration extends LookAheadIteration<Bi
 		return result.get(currentIdx++);
 	}
 
+	@SuppressWarnings("iteration:method.invocation") // Guard condition ensures Iterator hasNext: bIn.size() == 1 ==>
+														// bIn.getBindingNames() is NonEmpty
 	protected ArrayList<BindingSet> computeResult() throws QueryEvaluationException {
 
 		List<Binding> a_res = new ArrayList<>();
