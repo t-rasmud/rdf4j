@@ -78,9 +78,9 @@
 								<annotationProcessor>org.checkerframework.checker.iteration.IterationChecker</annotationProcessor>
 							</annotationProcessors>
 							<compilerArgs>
-								<arg>"-AsuppressWarnings=contracts.conditional.postcondition"</arg>
+								<arg>"-AsuppressWarnings=contracts.conditional.postcondition,contracts.postcondition,inconsistent.constructor.type,override.return,super.invocation,override.param"</arg>
 								<arg>-Awarns</arg>
-								<arg>-Astubs="/Users/rashmi/iteration-case-studies/rdf4j/guava.astub"</arg>
+								<arg>"-Astubs=/Users/rashmi/iteration-case-studies/rdf4j/guava.astub:/Users/rashmi/iteration-case-studies/rdf4j/junit.astub"</arg>
 								<!-- -Awarns turns type-checking errors into warnings. -->
 							</compilerArgs>
 						</configuration>
@@ -819,8 +819,8 @@
 							<annotationProcessor>org.checkerframework.checker.iteration.IterationChecker</annotationProcessor>
 						</annotationProcessors>
 						<compilerArgs>
-							<arg>"-AsuppressWarnings=contracts.conditional.postcondition"</arg>
-							<arg>-Astubs="/Users/rashmi/iteration-case-studies/rdf4j/guava.astub"</arg>
+							<arg>"-AsuppressWarnings=contracts.conditional.postcondition,contracts.postcondition,inconsistent.constructor.type,override.return,super.invocation,override.param"</arg>
+							<arg>"-Astubs=/Users/rashmi/iteration-case-studies/rdf4j/guava.astub:/Users/rashmi/iteration-case-studies/rdf4j/junit.astub"</arg>
 							<arg>-Awarns</arg>
 							<!-- -Awarns turns type-checking errors into warnings. -->
 						</compilerArgs>
