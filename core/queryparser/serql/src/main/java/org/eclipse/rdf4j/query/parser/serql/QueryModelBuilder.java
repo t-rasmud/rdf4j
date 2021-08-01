@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.checkerframework.checker.nonempty.qual.NonEmpty;
+import org.checkerframework.framework.qual.RequiresQualifier;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Value;
@@ -462,6 +464,7 @@ class QueryModelBuilder extends AbstractASTVisitor {
 	}
 
 	@Override
+	@RequiresQualifier(expression = "node.children", qualifier = NonEmpty.class)
 	public Object visit(ASTPathExprUnion node, Object data) throws VisitorException {
 		Iterator<ASTPathExpr> args = node.getPathExprList().iterator();
 

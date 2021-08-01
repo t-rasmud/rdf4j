@@ -101,8 +101,9 @@ public class HashJoinIteration extends LookAheadIteration<BindingSet, QueryEvalu
 	 *---------*/
 
 	@Override
-	@SuppressWarnings({"iteration:method.invocation","iteration:argument"}) // null as a proxy for hasNext: `nextHashTableValues` has atleast
-														// one element if it isn't null
+	@SuppressWarnings({ "iteration:method.invocation", "iteration:argument" }) // null as a proxy for hasNext:
+																				// `nextHashTableValues` has atleast
+	// one element if it isn't null
 	protected BindingSet getNextElement() throws QueryEvaluationException {
 		Map<BindingSetHashKey, List<BindingSet>> nextHashTable = hashTable;
 		if (nextHashTable == null) {
